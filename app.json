@@ -1,0 +1,30 @@
+{
+    "name": "E-Bikes Manufacturing Site",
+    "description": "E-Bikes Manufacturing site. Built on Lightning Web Components Open Source.",
+    "repository": "https://github.com/pozil/ebikes-manufacturing-lwc-oss",
+    "logo": "https://github.com/pozil/ebikes-manufacturing-lwc-oss/raw/master/src/client/resources/app-logo.svg",
+    "keywords": ["lightning", "salesforce", "web-components", "open source"],
+    "env": {
+        "SF_LOGIN_URL": {
+            "description": "Salesforce authentication domain",
+            "value": "https://test.salesforce.com/",
+            "required": true
+        },
+        "SF_USERNAME": {
+            "description": "Salesforce username",
+            "value": "",
+            "required": true
+        },
+        "SF_PASSWORD": {
+            "description": "Salesforce password",
+            "value": "",
+            "required": true
+        },
+        "SF_TOKEN": {
+            "description": "Salesforce security token",
+            "value": "",
+            "required": true
+        }
+    },
+    "success_url": "/"
+}

@@ -1,0 +1,14 @@
+# Jest coverage
+coverage/
+
+# Default build folder
+dist/
+
+# Tooling generated config
+.vscode/
+
+# Default resources folder
+src/client/resources/
+
+# Bulma minified style
+src/client/modules/ui/bulma/

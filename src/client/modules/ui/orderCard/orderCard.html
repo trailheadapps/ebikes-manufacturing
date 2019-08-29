@@ -1,0 +1,72 @@
+<template>
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+                Order #{order.Name}&nbsp;-&nbsp;<a href="#"
+                    >{order.Account__r.Name}</a
+                >
+            </p>
+            <a href="#" class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+            </a>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th class="has-text-centered">Qty S</th>
+                            <th class="has-text-centered">Qty M</th>
+                            <th class="has-text-centered">Qty L</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={orderItems} for:item="orderItem">
+                            <tr key={orderItem.Id}>
+                                <td>
+                                    <div class="product-media">
+                                        <img
+                                            src={orderItem.Product__r.Picture_URL__c}
+                                            alt={orderItem.Product__r.Name}
+                                        />
+                                        <h5>{orderItem.Product__r.Name}</h5>
+                                    </div>
+                                </td>
+                                <td>${orderItem.Price__c}</td>
+                                <td class="has-text-centered">
+                                    {orderItem.Qty_S__c}
+                                </td>
+                                <td class="has-text-centered">
+                                    {orderItem.Qty_M__c}
+                                </td>
+                                <td class="has-text-centered">
+                                    {orderItem.Qty_L__c}
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a
+                href="#"
+                class="card-footer-item"
+                data-status="Draft"
+                onclick={handleStatusClick}
+                >Reject</a
+            >
+            <a
+                href="#"
+                class="card-footer-item"
+                data-status="Approved by Manufacturing"
+                onclick={handleStatusClick}
+                >Approve</a
+            >
+        </footer>
+    </div>
+</template>

@@ -1,0 +1,28 @@
+# Log files
+logs
+*.log
+*-debug.log
+*-error.log
+
+# Standard dist folder
+/dist
+
+# App config file
+.env
+
+# Tooling files
+.vscode
+node_modules
+jsconfig.json
+
+# Jest coverage folder
+/coverage
+
+# MacOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/

@@ -1,0 +1,40 @@
+@import '../bulma/bulma-orderCard.css';
+
+.card {
+    margin: 2rem auto;
+    animation: slideFromLeft 1.5s both;
+}
+
+.card.slide-right {
+    animation: slideRight 1.5s both;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100vw);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideRight {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100vw);
+    }
+}
+
+.product-media {
+    display: flex;
+    flex-wrap: wrap;
+}
+.product-media > img {
+    width: 7rem;
+}

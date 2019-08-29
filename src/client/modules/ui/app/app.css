@@ -1,0 +1,24 @@
+@import '../bulma/bulma-app.css';
+
+.footer {
+    background: linear-gradient(
+        180deg,
+        rgba(245, 245, 245, 1) 0%,
+        rgb(204, 204, 204) 100%
+    );
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3rem 1.5rem;
+}
+
+.footer-logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-logo-wrapper img {
+    width: 2rem;
+}

@@ -1,0 +1,56 @@
+{
+    "name": "lwc-oss-manufacturing",
+    "version": "0.0.0",
+    "author": "pozil",
+    "bugs": "https://github.com/pozil/lwc-oss-manufacturing/issues",
+    "dependencies": {
+        "@lwc/compiler": "1.1.0-alpha4",
+        "@lwc/engine": "1.1.0-alpha4",
+        "dotenv": "^8.1.0",
+        "jsforce": "^1.9.2",
+        "lwc-services": "^1.2.2",
+        "ws": "^7.1.2"
+    },
+    "devDependencies": {
+        "husky": "^2.7.0",
+        "lint-staged": "^8.2.1"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "homepage": "https://github.com/pozil/lwc-oss-manufacturing",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "keywords": [
+        "lwc"
+    ],
+    "license": "MIT",
+    "lint-staged": {
+        "**/*.{css,html,js,json,md,yaml,yml}": [
+            "prettier --write"
+        ],
+        "**/modules/**/*.js": [
+            "eslint"
+        ],
+        "*": [
+            "git add"
+        ]
+    },
+    "repository": "pozil/lwc-oss-manufacturing",
+    "scripts": {
+        "build": "lwc-services build -m production",
+        "build:development": "lwc-services build",
+        "lint": "eslint ./src/**/*.js",
+        "prettier": "prettier --write '**/*.{css,html,js,json,md,yaml,yml}'",
+        "prettier:verify": "prettier --list-different '**/*.{css,html,js,json,md,yaml,yml}'",
+        "serve": "lwc-services serve",
+        "test:unit": "lwc-services test",
+        "test:unit:coverage": "lwc-services test --coverage",
+        "test:unit:debug": "lwc-services test --debug",
+        "test:unit:watch": "lwc-services test --watch",
+        "watch": "lwc-services watch"
+    }
+}

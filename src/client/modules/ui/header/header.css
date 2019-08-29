@@ -1,0 +1,17 @@
+@import '../bulma/bulma-header.css';
+
+.app-name {
+    font-weight: bolder;
+    padding-left: 1rem;
+    color: #ffa500;
+}
+
+.button.logout {
+    color: #ffffff;
+    background: linear-gradient(56deg, #ffa500 0%, #f26419 100%);
+    border: 1px solid #f26419;
+}
+
+.button.logout:hover {
+    background: linear-gradient(56deg, #ffa500 0%, #f26419 50%);
+}

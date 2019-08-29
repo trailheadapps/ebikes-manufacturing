@@ -1,0 +1,29 @@
+<template>
+    <ui-header></ui-header>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Orders</h1>
+
+            <template for:each={orders} for:item="order">
+                <ui-order-card
+                    key={order.Id}
+                    order-id={order.Id}
+                    order={order}
+                    onstatuschange={handleStatusChange}
+                ></ui-order-card>
+            </template>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <div class="footer-logo-wrapper">
+                <img src="resources/lwc-logo.svg" />
+                <span class="has-text-dark"
+                    >Built with Lightning Web Components Open Source</span
+                >
+            </div>
+        </div>
+    </footer>
+</template>

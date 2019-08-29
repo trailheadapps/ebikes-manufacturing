@@ -1,0 +1,117 @@
+/* eslint-disable no-console */
+import { LightningElement, track, wire } from 'lwc';
+import getOrders from 'data/wireOrders';
+
+const WEB_SOCKET_PORT = 8081;
+const DELETE_ANIMATION_DURATION = 1500;
+
+export default class App extends LightningElement {
+    @track orders = [];
+
+    @wire(getOrders)
+    getOrders({ error, data }) {
+        if (data) {
+            this.orders = data;
+        } else if (error) {
+            console.error('Failed to retrieve orders', JSON.stringify(error));
+        }
+    }
+
+    connectedCallback() {
+        this.setupWebSocket();
+    }
+
+    setupWebSocket() {
+        // Get WebSocket URL
+        const url =
+            (window.location.protocol === 'http:' ? 'ws://' : 'wss://') +
+            window.location.hostname +
+            ':' +
+            WEB_SOCKET_PORT;
+        // Open connection
+        console.log('WS opening ', url);
+        this.ws = new WebSocket(url);
+        this.ws.addEventListener('open', () => {
+            console.log('WS open');
+            this.heartbeat();
+        });
+        // Listen for messages
+        this.ws.addEventListener('message', event => {
+            const eventData = JSON.parse(event.data);
+
+            if (eventData.type === 'ping') {
+                console.log('WS ping');
+                this.ws.send('{ "type" : "pong" }');
+                this.heartbeat();
+                return;
+            }
+
+            console.log('WS message received', eventData);
+            const orderId = eventData.data.payload.Order_Id__c;
+            const status = eventData.data.payload.Status__c;
+            if (status === 'Draft') {
+                this.removeOrder(orderId);
+            } else if (status === 'Submitted to Manufacturing') {
+                this.loadOrder(orderId);
+            }
+        });
+
+        // Listen for errors
+        this.ws.addEventListener('error', event => {
+            console.error('WS error', event);
+        });
+
+        this.ws.addEventListener('close', () => {
+            clearTimeout(this.pingTimeout);
+            console.info('WS connection closed');
+        });
+    }
+
+    heartbeat() {
+        clearTimeout(this.pingTimeout);
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
+        this.pingTimeout = setTimeout(() => {
+            this.ws.close();
+            console.warn('WS connection closed after timeout');
+        }, 30000 + 1000);
+    }
+
+    loadOrder(orderId) {
+        const index = this.orders.findIndex(order => order.Id === orderId);
+        if (index === -1) {
+            fetch(`/api/orders/${orderId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No response from server');
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    console.log('Retrieved order ', result);
+                    this.orders.push(result.data);
+                });
+        }
+    }
+
+    removeOrder(orderId) {
+        const index = this.orders.findIndex(order => order.Id === orderId);
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
+        setTimeout(() => {
+            this.orders.splice(index, 1);
+        }, DELETE_ANIMATION_DURATION);
+    }
+
+    handleStatusChange(event) {
+        const { orderId } = event.detail;
+        const index = this.orders.findIndex(order => order.Id === orderId);
+        if (index !== -1) {
+            const eventData = {
+                type: 'manufacturingEvent',
+                data: event.detail
+            };
+            console.log('WS send: ', eventData);
+            this.ws.send(JSON.stringify(eventData));
+            this.removeOrder(orderId);
+        }
+    }
+}
