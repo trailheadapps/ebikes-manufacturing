@@ -1,7 +1,7 @@
 const jsforce = require('jsforce');
 
-const WebSocketService = require('./webSocketService.js');
-const OrderRestResource = require('./rest/order.js');
+const WebSocketService = require('./services/webSocketService.js');
+const OrderRestResource = require('./services/orderRestResource.js');
 
 // Load and check config
 require('dotenv').config();
