@@ -38,17 +38,14 @@ export default class App extends LightningElement {
         // Listen for messages
         this.ws.addEventListener('message', event => {
             const eventData = JSON.parse(event.data);
-
             if (eventData.type === 'ping') {
-                console.log('WS ping');
                 this.ws.send('{ "type" : "pong" }');
                 this.heartbeat();
                 return;
             }
 
-            console.log('WS message received', eventData);
-            const orderId = eventData.data.payload.Order_Id__c;
-            const status = eventData.data.payload.Status__c;
+            console.log('WS received: ', eventData);
+            const { orderId, status } = eventData.data;
             if (status === 'Draft') {
                 this.removeOrder(orderId);
             } else if (status === 'Submitted to Manufacturing') {
@@ -87,7 +84,6 @@ export default class App extends LightningElement {
                     return response.json();
                 })
                 .then(result => {
-                    console.log('Retrieved order ', result);
                     this.orders.push(result.data);
                 });
         }

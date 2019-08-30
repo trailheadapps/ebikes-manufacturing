@@ -41,7 +41,7 @@ module.exports = class WebSocketService {
         setInterval(() => {
             this.wss.clients.forEach(wsClient => {
                 if (wsClient.isAlive === false) {
-                    console.log('Removing inactive WS client');
+                    console.log('WS removing inactive client');
                     wsClient.terminate();
                 } else {
                     wsClient.isAlive = false;
@@ -57,7 +57,7 @@ module.exports = class WebSocketService {
 
     broadcast(data) {
         console.log(
-            `Broadcasting to ${this.wss.clients.size} client(s): `,
+            `WS broadcasting to ${this.wss.clients.size} client(s): `,
             data
         );
         this.wss.clients.forEach(client => {

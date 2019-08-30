@@ -10,7 +10,6 @@ export default class OrderCard extends LightningElement {
     @wire(getOrderItems, { orderId: '$orderId' })
     getOrderItems({ error, data }) {
         if (data) {
-            console.log('Order items: ', JSON.stringify(data));
             this.orderItems = data;
         } else if (error) {
             console.error(

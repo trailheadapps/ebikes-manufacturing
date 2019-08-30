@@ -6,7 +6,7 @@
             <h1 class="title">Orders</h1>
 
             <template if:false={hasOrders}>
-                <img class="illustration" src="resources/illustration.svg"/>
+                <img class="illustration" src="resources/illustration.svg" />
             </template>
             <template if:true={hasOrders}>
                 <template for:each={orders} for:item="order">

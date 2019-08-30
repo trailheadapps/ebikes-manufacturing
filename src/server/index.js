@@ -28,24 +28,26 @@ module.exports = app => {
         }
         console.log('Connected to Salesforce');
     }).then(() => {
-        // Broadcast incoming Platform Events to WS clients
-        sfdc.streaming
-            .topic('/event/Manufacturing_Event__e')
-            .subscribe(event => {
-                // Filter event to prevent loop
-                if (event.payload.Status__c !== 'Approved by Manufacturing') {
-                    const message = {
-                        type: 'manufacturingEvent',
-                        data: event
-                    };
-                    wss.broadcast(JSON.stringify(message));
-                }
-            });
+        // Subscribe to Change Data Capture on Reseller Order records
+        sfdc.streaming.topic('/data/Order__ChangeEvent').subscribe(event => {
+            const status = event.payload.Status__c;
+            // Filter events to prevent loop
+            if (status !== 'Approved by Manufacturing') {
+                // Reformat message and send it to client via WebSocket
+                const message = {
+                    type: 'manufacturingEvent',
+                    data: {
+                        orderId: event.payload.ChangeEventHeader.recordIds[0],
+                        status
+                    }
+                };
+                wss.broadcast(JSON.stringify(message));
+            }
+        });
     });
 
     // Handle incoming WS events
     wss.addMessageListener(message => {
-        console.log('Incoming WS message', message);
         const { orderId, status } = message.data;
         const eventData = { Order_Id__c: orderId, Status__c: status };
         sfdc.sobject('Manufacturing_Event__e').insert(
