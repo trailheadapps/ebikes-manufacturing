@@ -12,3 +12,6 @@ src/client/resources/
 
 # Bulma minified style
 src/client/modules/ui/bulma/
+
+# Prevent LWC bug with <hr/> self closing void element (skip heaeder component)
+src/client/modules/ui/header/header.html
