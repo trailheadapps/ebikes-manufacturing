@@ -41,6 +41,7 @@
     },
     "repository": "pozil/lwc-oss-manufacturing",
     "scripts": {
+        "start": "npm run build:development && npm run serve",
         "build": "lwc-services build -m production",
         "build:development": "lwc-services build",
         "lint": "eslint ./src/**/*.js",

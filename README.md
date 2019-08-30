@@ -23,4 +23,4 @@ SF_PASSWORD='YOUR_SALESFORCE_PASSWORD'
 SF_TOKEN='YOUR_SALESFORCE_SECURITY_TOKEN'
 ```
 
-Run the project with `npm run build:development && npm run serve`
+Run the project with `npm start`
