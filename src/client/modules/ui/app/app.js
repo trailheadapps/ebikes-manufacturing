@@ -114,4 +114,8 @@ export default class App extends LightningElement {
             this.removeOrder(orderId);
         }
     }
+
+    get hasOrders() {
+        return this.orders.length > 0;
+    }
 }

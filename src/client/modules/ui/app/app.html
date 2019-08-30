@@ -5,13 +5,18 @@
         <div class="container">
             <h1 class="title">Orders</h1>
 
-            <template for:each={orders} for:item="order">
-                <ui-order-card
-                    key={order.Id}
-                    order-id={order.Id}
-                    order={order}
-                    onstatuschange={handleStatusChange}
-                ></ui-order-card>
+            <template if:false={hasOrders}>
+                <img class="illustration" src="resources/illustration.svg"/>
+            </template>
+            <template if:true={hasOrders}>
+                <template for:each={orders} for:item="order">
+                    <ui-order-card
+                        key={order.Id}
+                        order-id={order.Id}
+                        order={order}
+                        onstatuschange={handleStatusChange}
+                    ></ui-order-card>
+                </template>
             </template>
         </div>
     </section>

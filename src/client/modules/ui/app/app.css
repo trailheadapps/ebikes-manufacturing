@@ -22,3 +22,9 @@
 .footer-logo-wrapper img {
     width: 2rem;
 }
+
+
+.illustration {
+    margin: 2rem auto;
+    display: block;
+}
