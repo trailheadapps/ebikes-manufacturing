@@ -4,6 +4,9 @@ logs
 *-debug.log
 *-error.log
 
+# Dist dependencies
+src/client/resources/dependencies
+
 # Standard dist folder
 /dist
 

@@ -6,6 +6,7 @@
     "dependencies": {
         "@lwc/compiler": "1.1.0-alpha4",
         "@lwc/engine": "1.1.0-alpha4",
+        "bulma": "^0.7.5",
         "dotenv": "^8.1.0",
         "jsforce": "^1.9.2",
         "lwc-services": "^1.2.2",
@@ -41,7 +42,7 @@
     },
     "repository": "pozil/lwc-oss-manufacturing",
     "scripts": {
-        "start": "npm run build:development && npm run serve",
+        "start": "npm run build && npm run serve",
         "build": "lwc-services build -m production",
         "build:development": "lwc-services build",
         "lint": "eslint ./src/**/*.js",
@@ -52,6 +53,8 @@
         "test:unit:coverage": "lwc-services test --coverage",
         "test:unit:debug": "lwc-services test --debug",
         "test:unit:watch": "lwc-services test --watch",
-        "watch": "lwc-services watch"
+        "watch": "lwc-services watch",
+        "preinstall": "rm -fr src/client/resources/dependencies",
+        "postinstall": "mkdir -p src/client/resources/dependencies && cp node_modules/bulma/css/bulma.min.css src/client/resources/dependencies/."
     }
 }
