@@ -6,5 +6,8 @@ module.exports = {
     moduleDir: './src/client/modules',
     server: {
         customConfig: './src/server/index.js'
+    },
+    devServer: {
+        proxy: { '/': 'http://localhost:3002' }
     }
 };

@@ -1,6 +1,4 @@
 const jsforce = require('jsforce');
-
-const WebSocketService = require('./services/webSocketService.js');
 const OrderRestResource = require('./services/orderRestResource.js');
 
 // Load and check config
@@ -13,10 +11,7 @@ if (!(SF_USERNAME && SF_PASSWORD && SF_TOKEN && SF_LOGIN_URL)) {
     process.exit(-1);
 }
 
-module.exports = app => {
-    const wss = new WebSocketService();
-    wss.connect();
-
+module.exports = (app, wss) => {
     // Connect to Salesforce
     const sfdc = new jsforce.Connection({
         loginUrl: SF_LOGIN_URL
