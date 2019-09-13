@@ -1,18 +1,16 @@
 const WebSocket = require('ws');
 
-const WSS_PORT = 8081;
-const WSS_PING_INTERVAL = 30000;
+const WSS_PING_INTERVAL = 29000;
 
 module.exports = class WebSocketService {
     constructor() {
         this.messageListeners = [];
     }
 
-    connect() {
+    connect(server) {
         // Start WebSocket server
         this.wss = new WebSocket.Server({
-            port: WSS_PORT,
-            clientTracking: true
+            server
         });
         // Listen for WS client connections
         this.wss.on('connection', wsClient => {

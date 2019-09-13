@@ -2,7 +2,6 @@
 import { LightningElement, track, wire } from 'lwc';
 import getOrders from 'data/wireOrders';
 
-const WEB_SOCKET_PORT = 8081;
 const DELETE_ANIMATION_DURATION = 1500;
 
 export default class App extends LightningElement {
@@ -25,9 +24,7 @@ export default class App extends LightningElement {
         // Get WebSocket URL
         const url =
             (window.location.protocol === 'http:' ? 'ws://' : 'wss://') +
-            window.location.hostname +
-            ':' +
-            WEB_SOCKET_PORT;
+            window.location.host;
         // Open connection
         console.log('WS opening ', url);
         this.ws = new WebSocket(url);
