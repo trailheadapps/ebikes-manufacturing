@@ -21,22 +21,27 @@ module.exports = (app, wss) => {
             console.error(err);
             process.exit(-1);
         }
-        console.log('Connected to Salesforce');
     }).then(() => {
-        // Subscribe to Change Data Capture on Reseller Order records
-        sfdc.streaming.topic('/data/Order__ChangeEvent').subscribe(event => {
-            const status = event.payload.Status__c;
-            // Filter events to prevent loop
-            if (status !== 'Approved by Manufacturing') {
-                // Reformat message and send it to client via WebSocket
-                const message = {
-                    type: 'manufacturingEvent',
-                    data: {
-                        orderId: event.payload.ChangeEventHeader.recordIds[0],
-                        status
-                    }
-                };
-                wss.broadcast(JSON.stringify(message));
+        console.log('Connected to Salesforce');
+
+        // Subscribe to Change Data Capture event on Reseller Order records
+        sfdc.streaming.topic('/data/Order__ChangeEvent').subscribe(cdcEvent => {
+            const status = cdcEvent.payload.Status__c;
+            const header = cdcEvent.payload.ChangeEventHeader;
+            // Filter events related to order status updates
+            if (header.changeType === 'UPDATE' && status) {
+                // Handle all impacted records
+                header.recordIds.forEach(orderId => {
+                    // Notify client via WebSocket
+                    const message = {
+                        type: 'manufacturingEvent',
+                        data: {
+                            orderId,
+                            status
+                        }
+                    };
+                    wss.broadcast(JSON.stringify(message));
+                });
             }
         });
     });
