@@ -36,3 +36,14 @@
 .product-media > img {
     width: 7rem;
 }
+
+footer > a {
+    color: #ffa500;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #363636;
+}
+footer > a:hover {
+    color: #ffffff;
+    background-color: #5a5a5a;
+}
