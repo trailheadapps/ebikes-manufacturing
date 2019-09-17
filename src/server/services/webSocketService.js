@@ -10,7 +10,8 @@ module.exports = class WebSocketService {
     connect(server) {
         // Start WebSocket server
         this.wss = new WebSocket.Server({
-            server
+            server,
+            clientTracking: true
         });
         // Listen for WS client connections
         this.wss.on('connection', wsClient => {
@@ -38,7 +39,7 @@ module.exports = class WebSocketService {
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         setInterval(() => {
             this.wss.clients.forEach(wsClient => {
-                if (wsClient.isAlive === false) {
+                if (!wsClient.isAlive) {
                     console.log('WS removing inactive client');
                     wsClient.terminate();
                 } else {
