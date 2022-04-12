@@ -17,10 +17,13 @@ Click on this button and follow the instructions to deploy the app:
 Create a `.env` file at the root of the project:
 
 ```
-SF_LOGIN_URL='https://test.salesforce.com'
-SF_USERNAME='YOUR_SALESFORCE_USERNAME'
-SF_PASSWORD='YOUR_SALESFORCE_PASSWORD'
-SF_TOKEN='YOUR_SALESFORCE_SECURITY_TOKEN'
+SALESFORCE_LOGIN_URL='https://test.salesforce.com'
+SALESFORCE_USERNAME='YOUR_SALESFORCE_USERNAME'
+SALESFORCE_PASSWORD='YOUR_SALESFORCE_PASSWORD'
+SALESFORCE_TOKEN='YOUR_SALESFORCE_SECURITY_TOKEN'
+
+PUB_SUB_ENDPOINT="api.pilot.pubsub.salesforce.com:7443"
+PUB_SUB_PROTO_FILE="pubsub_api.proto"
 ```
 
 Run the project with `npm start`

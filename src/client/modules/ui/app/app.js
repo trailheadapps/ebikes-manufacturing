@@ -33,7 +33,7 @@ export default class App extends LightningElement {
             this.heartbeat();
         });
         // Listen for messages
-        this.ws.addEventListener('message', event => {
+        this.ws.addEventListener('message', (event) => {
             const eventData = JSON.parse(event.data);
             if (eventData.type === 'ping') {
                 this.ws.send('{ "type" : "pong" }');
@@ -51,7 +51,7 @@ export default class App extends LightningElement {
         });
 
         // Listen for errors
-        this.ws.addEventListener('error', event => {
+        this.ws.addEventListener('error', (event) => {
             console.error('WS error', event);
         });
 
@@ -71,23 +71,23 @@ export default class App extends LightningElement {
     }
 
     loadOrder(orderId) {
-        const index = this.orders.findIndex(order => order.Id === orderId);
+        const index = this.orders.findIndex((order) => order.Id === orderId);
         if (index === -1) {
             fetch(`/api/orders/${orderId}`)
-                .then(response => {
+                .then((response) => {
                     if (!response.ok) {
                         throw new Error('No response from server');
                     }
                     return response.json();
                 })
-                .then(result => {
+                .then((result) => {
                     this.orders.push(result.data);
                 });
         }
     }
 
     removeOrder(orderId) {
-        const index = this.orders.findIndex(order => order.Id === orderId);
+        const index = this.orders.findIndex((order) => order.Id === orderId);
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         setTimeout(() => {
             this.orders.splice(index, 1);
@@ -96,7 +96,7 @@ export default class App extends LightningElement {
 
     handleStatusChange(event) {
         const { orderId } = event.detail;
-        const index = this.orders.findIndex(order => order.Id === orderId);
+        const index = this.orders.findIndex((order) => order.Id === orderId);
         if (index !== -1) {
             const eventData = {
                 type: 'manufacturingEvent',

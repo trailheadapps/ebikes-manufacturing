@@ -1,8 +1,5 @@
 import '@lwc/synthetic-shadow';
-import { buildCustomElementConstructor, register } from 'lwc';
-import { registerWireService } from '@lwc/wire-service';
+import { buildCustomElementConstructor } from 'lwc';
 import App from 'ui/app';
-
-registerWireService(register);
 
 customElements.define('ui-app', buildCustomElementConstructor(App));

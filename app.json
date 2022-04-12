@@ -5,24 +5,34 @@
     "logo": "https://lwc-recipes-oss.herokuapp.com/resources/images/logo.svg",
     "keywords": ["lightning", "salesforce", "web-components", "open source"],
     "env": {
-        "SF_LOGIN_URL": {
+        "SALESFORCE_LOGIN_URL": {
             "description": "Salesforce authentication domain",
             "value": "https://test.salesforce.com/",
             "required": true
         },
-        "SF_USERNAME": {
+        "SALESFORCE_USERNAME": {
             "description": "Salesforce username",
             "value": "",
             "required": true
         },
-        "SF_PASSWORD": {
+        "SALESFORCE_PASSWORD": {
             "description": "Salesforce password",
             "value": "",
             "required": true
         },
-        "SF_TOKEN": {
+        "SALESFORCE_TOKEN": {
             "description": "Salesforce security token",
             "value": "",
+            "required": true
+        },
+        "PUB_SUB_ENDPOINT": {
+            "description": "Pub Sub API endpoint",
+            "value": "api.pilot.pubsub.salesforce.com:7443",
+            "required": true
+        },
+        "PUB_SUB_PROTO_FILE": {
+            "description": "Pub Sub API protobuf file",
+            "value": "pubsub_api.proto",
             "required": true
         }
     },
