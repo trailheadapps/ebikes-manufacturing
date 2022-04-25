@@ -85,7 +85,7 @@ module.exports = class PubSubService {
      * @param {string} schema.id
      * @param {Object} schema.type
      * @param {number} numRequested number of incoming events that will be accepted before connection is closed
-     * @param {function} eventHandler
+     * @param {Function} eventHandler
      */
     subscribe(topicName, schema, numRequested, eventHandler) {
         const subscription = this.client.Subscribe();
@@ -143,8 +143,6 @@ module.exports = class PubSubService {
      * Publishes a payload to a topic using the gRPC client
      * @param {string} topicName name of the topic that we're subscribing to
      * @param {Object} schema event schema associated with the topic
-     * @param {string} schema.id
-     * @param {Object} schema.type
      * @param {Object} payload
      */
     async publish(topicName, schema, payload) {
