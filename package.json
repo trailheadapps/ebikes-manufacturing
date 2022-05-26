@@ -4,18 +4,18 @@
     "author": "pozil",
     "bugs": "https://github.com/pozil/lwc-oss-manufacturing/issues",
     "dependencies": {
-        "@grpc/grpc-js": "^1.6.2",
-        "@grpc/proto-loader": "^0.6.9",
-        "@lwc/compiler": "^2.12.1",
+        "@grpc/grpc-js": "^1.6.7",
+        "@grpc/proto-loader": "^0.6.12",
+        "@lwc/compiler": "^2.14.0",
         "@lwc/engine": "^1.17.6",
         "avro-js": "^1.11.0",
         "bulma": "^0.7.5",
         "certifi": "^14.5.15",
-        "dotenv": "^16.0.0",
+        "dotenv": "^16.0.1",
         "grpc": "^1.24.11",
         "jsforce": "^1.11.0",
         "lwc-services": "^3.2.2",
-        "ws": "^8.5.0"
+        "ws": "^8.6.0"
     },
     "devDependencies": {
         "eslint": "^7.32.0",
@@ -24,7 +24,7 @@
         "prettier": "^2.6.2"
     },
     "engines": {
-        "node": ">=16.0.0"
+        "node": "16.15.0"
     },
     "homepage": "https://github.com/pozil/lwc-oss-manufacturing",
     "license": "CC0-1.0",
@@ -57,7 +57,7 @@
         "precommit": "lint-staged"
     },
     "volta": {
-        "node": "16.13.1",
+        "node": "16.15.0",
         "npm": "8.1.2"
     }
 }
