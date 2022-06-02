@@ -30,9 +30,8 @@ const ORDER_CDC_TOPIC = '/data/Order__ChangeEvent';
 const MANUFACTURING_PE_TOPIC = '/event/Manufacturing_Event__e';
 
 module.exports = async (app, wss) => {
-    const sfClient = new SalesforceClient();
-
     // Connect to Salesforce
+    const sfClient = new SalesforceClient();
     await sfClient.connect(
         SALESFORCE_LOGIN_URL,
         SALESFORCE_USERNAME,
