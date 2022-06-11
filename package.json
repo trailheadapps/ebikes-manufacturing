@@ -30,7 +30,7 @@
         "prettier": "^2.6.2"
     },
     "engines": {
-        "node": "16.15.0"
+        "node": "14.19.3"
     },
     "homepage": "https://github.com/pozil/lwc-oss-manufacturing",
     "license": "CC0-1.0",
@@ -58,7 +58,7 @@
         "precommit": "lint-staged"
     },
     "volta": {
-        "node": "16.15.0",
+        "node": "14.19.3",
         "npm": "8.1.2"
     }
 }
