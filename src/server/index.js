@@ -1,6 +1,6 @@
-const OrderRestResource = require('./api/orderRestResource.js');
-const SalesforceClient = require('./services/salesforceClient.js');
-const PubSubService = require('./services/pubSubService.js');
+const OrderRestResource = require('./api/orderRestResource.js'),
+    SalesforceClient = require('./services/salesforceClient.js'),
+    PubSubService = require('./services/pubSubService.js');
 
 // Load and check config
 require('dotenv').config();

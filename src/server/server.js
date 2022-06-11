@@ -1,18 +1,20 @@
-const express = require('express'),
-    path = require('path'),
-    configureServer = require('./index.js'),
-    WebSocketService = require('./services/webSocketService.js');
+const configureServer = require('./index.js'),
+    WebSocketService = require('./services/webSocketService.js'),
+    LWR = require('lwr');
 
-const PORT = process.env.PORT || 3002;
-const DIST_DIR = path.join(__dirname, '../../dist');
-
+// Configure server
+const lwrServer = LWR.createServer();
+const app = lwrServer.getInternalServer();
 const wss = new WebSocketService();
-
-// Configure and start express
-const app = express();
-app.use(express.static(DIST_DIR));
 configureServer(app, wss);
-const server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
-// Connect WebSocket server
-wss.connect(server);
+// HTTP and WebSocket Listen
+lwrServer
+    .listen(({ port, serverMode }) => {
+        console.log(`App listening on port ${port} in ${serverMode} mode\n`);
+        wss.connect(app);
+    })
+    .catch((err) => {
+        console.error(err);
+        process.exit(1);
+    });

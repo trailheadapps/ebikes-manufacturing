@@ -1,9 +1,9 @@
 {
     "name": "E-Bikes Manufacturing Site",
-    "description": "E-Bikes Manufacturing site. Built on Lightning Web Components Open Source.",
+    "description": "E-Bikes Manufacturing site. Built on Lightning Web Runtime.",
     "repository": "https://github.com/pozil/ebikes-manufacturing-lwc-oss",
-    "logo": "https://lwc-recipes-oss.herokuapp.com/resources/images/logo.svg",
-    "keywords": ["lightning", "salesforce", "web-components", "open source"],
+    "logo": "https://lwc-recipes-oss.herokuapp.com/assets/images/logo.svg",
+    "keywords": ["lightning", "salesforce", "web-components", "lwr"],
     "env": {
         "SALESFORCE_LOGIN_URL": {
             "description": "Salesforce authentication domain",

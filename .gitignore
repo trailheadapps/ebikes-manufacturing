@@ -5,10 +5,7 @@ logs
 *-error.log
 
 # Dist dependencies
-src/client/resources/dependencies
-
-# Standard dist folder
-/dist
+src/client/assets/dependencies
 
 # App config file
 .env
@@ -16,7 +13,10 @@ src/client/resources/dependencies
 # Tooling files
 .vscode
 node_modules
-jsconfig.json
+jsconfig.jsconfig
+
+# LWR cache
+__lwr_cache__
 
 # Jest coverage folder
 /coverage
