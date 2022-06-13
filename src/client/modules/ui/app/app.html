@@ -6,7 +6,7 @@
             <h1 class="title">Orders</h1>
 
             <template if:false={hasOrders}>
-                <img class="illustration" src="resources/illustration.svg" />
+                <img class="illustration" src="assets/illustration.svg" />
             </template>
             <template if:true={hasOrders}>
                 <template for:each={orders} for:item="order">
@@ -24,9 +24,9 @@
     <footer class="footer">
         <div class="content has-text-centered">
             <div class="footer-logo-wrapper">
-                <img src="resources/lwc-logo.svg" />
+                <img src="assets/lwc-logo.svg" />
                 <span class="has-text-dark"
-                    >Built with Lightning Web Components Open Source</span
+                    >Built with the Lightning Web Runtime</span
                 >
             </div>
         </div>

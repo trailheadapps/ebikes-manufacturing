@@ -8,11 +8,13 @@ module.exports = class SalesforceClient {
      * @param {string} loginUrl
      * @param {string} username
      * @param {string} password
+     * @param {string} version
      */
-    async connect(loginUrl, username, password) {
+    async connect(loginUrl, username, password, version) {
         try {
             const client = new jsforce.Connection({
-                loginUrl
+                loginUrl,
+                version
             });
             const loginResult = await client.login(username, password);
             console.log(

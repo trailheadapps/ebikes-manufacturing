@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { LightningElement, track, wire } from 'lwc';
+import { WebSocketClient } from 'utils/webSocketClient';
 import getOrders from 'data/wireOrders';
 
 const DELETE_ANIMATION_DURATION = 1500;
@@ -17,57 +18,32 @@ export default class App extends LightningElement {
     }
 
     connectedCallback() {
-        this.setupWebSocket();
+        // Get WebSocket URL
+        const wsUrl =
+            (window.location.protocol === 'http:' ? 'ws://' : 'wss://') +
+            window.location.host +
+            '/websockets';
+        // Connect WebSocket
+        this.ws = new WebSocketClient(wsUrl);
+        this.ws.connect();
+        this.ws.addMessageListener((message) => {
+            this.handleWsMessage(message);
+        });
     }
 
-    setupWebSocket() {
-        // Get WebSocket URL
-        const url =
-            (window.location.protocol === 'http:' ? 'ws://' : 'wss://') +
-            window.location.host;
-        // Open connection
-        console.log('WS opening ', url);
-        this.ws = new WebSocket(url);
-        this.ws.addEventListener('open', () => {
-            console.log('WS open');
-            this.heartbeat();
-        });
-        // Listen for messages
-        this.ws.addEventListener('message', (event) => {
-            const eventData = JSON.parse(event.data);
-            if (eventData.type === 'ping') {
-                this.ws.send('{ "type" : "pong" }');
-                this.heartbeat();
-                return;
-            }
+    disconnectedCallback() {
+        this.ws.close();
+    }
 
-            console.log('WS received: ', eventData);
-            const { orderId, status } = eventData.data;
+    handleWsMessage(message) {
+        if (message?.type === 'manufacturingEvent') {
+            const { orderId, status } = message.data;
             if (status === 'Draft') {
                 this.removeOrder(orderId);
             } else if (status === 'Submitted to Manufacturing') {
                 this.loadOrder(orderId);
             }
-        });
-
-        // Listen for errors
-        this.ws.addEventListener('error', (event) => {
-            console.error('WS error', event);
-        });
-
-        this.ws.addEventListener('close', () => {
-            clearTimeout(this.pingTimeout);
-            console.info('WS connection closed');
-        });
-    }
-
-    heartbeat() {
-        clearTimeout(this.pingTimeout);
-        // eslint-disable-next-line @lwc/lwc/no-async-operation
-        this.pingTimeout = setTimeout(() => {
-            this.ws.close();
-            console.warn('WS connection closed after timeout');
-        }, 30000 + 1000);
+        }
     }
 
     loadOrder(orderId) {

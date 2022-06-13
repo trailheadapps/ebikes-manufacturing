@@ -17,7 +17,10 @@ module.exports = class OrderRestResource {
 
     getOrder(request, response) {
         const { orderId } = request.params;
-        const soql = `SELECT Id, Name, Account__r.Name FROM Order__c WHERE Id='${orderId}'`;
+        const soql = `SELECT Id, Name, Account__r.Name FROM Order__c WHERE Id='${orderId.replace(
+            "'",
+            ''
+        )}'`;
         this.sfdc.query(soql, (err, result) => {
             if (err) {
                 console.error(err);
@@ -35,7 +38,7 @@ module.exports = class OrderRestResource {
         const { orderId } = request.params;
         const soql = `SELECT Id, Product__r.Name, Product__r.Category__c, Product__r.Picture_URL__c, Price__c, Qty_S__c, Qty_M__c, Qty_L__c 
 			FROM Order_Item__c 
-			WHERE Order__c = '${orderId}'`;
+			WHERE Order__c = '${orderId.replace("'", '')}'`;
 
         this.sfdc.query(soql, (err, result) => {
             if (err) {

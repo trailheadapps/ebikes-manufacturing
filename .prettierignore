@@ -1,17 +1,14 @@
 # Jest coverage
 coverage/
 
-# Default build folder
-dist/
-
 # Tooling generated config
 .vscode/
 
+# LWR cache
+__lwr_cache__
+
 # Default resources folder
-src/client/resources/
+src/client/assets/
 
 # Bulma minified style
 src/client/modules/ui/bulma/
-
-# Prevent LWC bug with <hr/> self closing void element (skip heaeder component)
-src/client/modules/ui/header/header.html

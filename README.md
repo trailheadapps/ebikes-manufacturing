@@ -1,6 +1,6 @@
 # E-Bikes Manufacturing Site
 
-This site is built on Lightning Web Components Open Source.
+This site is built with the Lightning Web Runtime.
 
 ## Heroku deploy (recommended)
 
