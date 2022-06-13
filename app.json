@@ -10,6 +10,11 @@
             "value": "https://test.salesforce.com/",
             "required": true
         },
+        "SALESFORCE_API_VERSION": {
+            "description": "Salesforce API version",
+            "value": "55.0",
+            "required": true
+        },
         "SALESFORCE_USERNAME": {
             "description": "Salesforce username",
             "value": "",
