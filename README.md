@@ -1,6 +1,8 @@
-# E-Bikes Manufacturing Site
+# E-Bikes Manufacturing Demo
 
-This site is built with the Lightning Web Runtime.
+This demo is built with the Lightning Web Runtime and demonstrates the use of the Pub Sub API with Change Data Capture events and Platform Events.
+
+🎥 Watch a short [introduction video](https://youtu.be/g9P87_loVVA).
 
 > **Warning**
 > This demo app does not use the most secure authentication mechanism. We recommend using an [OAuth 2.0 JWT Bearer Flow](https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_jwt_flow.htm&type=5) for production environments.
