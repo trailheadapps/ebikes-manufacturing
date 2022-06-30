@@ -37,7 +37,7 @@ Once deployed, see the [configuration reference](#configuration-reference) secti
     SALESFORCE_PASSWORD="YOUR_SALESFORCE_PASSWORD"
     SALESFORCE_TOKEN="YOUR_SALESFORCE_SECURITY_TOKEN"
 
-    PUB_SUB_ENDPOINT="api.pilot.pubsub.salesforce.com:7443"
+    PUB_SUB_ENDPOINT="api.pubsub.salesforce.com:7443"
     PUB_SUB_PROTO_FILE="pubsub_api.proto"
     ```
 
@@ -51,12 +51,12 @@ Once deployed, see the [configuration reference](#configuration-reference) secti
 
 All variables are required.
 
-| Variable                 | Description                                                                                                                                                                     | Example                                |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `SALESFORCE_LOGIN_URL`   | The login URL of your Salesforce org:<br>`https://test.salesforce.com/` for scratch orgs and sandboxes<br/>`https://login.salesforce.com/` for Developer Edition and production | `https://test.salesforce.com`          |
-| `SALESFORCE_API_VERSION` | The Salesforce API version.                                                                                                                                                     | `55.0`                                 |
-| `SALESFORCE_USERNAME`    | Your Salesforce user's password.                                                                                                                                                | n/a                                    |
-| `SALESFORCE_PASSWORD`    | Your Salesforce username.                                                                                                                                                       | n/a                                    |
-| `SALESFORCE_TOKEN`       | Your Salesforce user's security token.                                                                                                                                          | n/a                                    |
-| `PUB_SUB_ENDPOINT`       | The endpoint used by the Pub Sub API.                                                                                                                                           | `api.pilot.pubsub.salesforce.com:7443` |
-| `PUB_SUB_PROTO_FILE`     | Path to the protobuf file.                                                                                                                                                      | `pubsub_api.proto`                     |
+| Variable                 | Description                                                                                                                                                                     | Example                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `SALESFORCE_LOGIN_URL`   | The login URL of your Salesforce org:<br>`https://test.salesforce.com/` for scratch orgs and sandboxes<br/>`https://login.salesforce.com/` for Developer Edition and production | `https://test.salesforce.com`    |
+| `SALESFORCE_API_VERSION` | The Salesforce API version.                                                                                                                                                     | `55.0`                           |
+| `SALESFORCE_USERNAME`    | Your Salesforce user's password.                                                                                                                                                | n/a                              |
+| `SALESFORCE_PASSWORD`    | Your Salesforce username.                                                                                                                                                       | n/a                              |
+| `SALESFORCE_TOKEN`       | Your Salesforce user's security token.                                                                                                                                          | n/a                              |
+| `PUB_SUB_ENDPOINT`       | The endpoint used by the Pub Sub API.                                                                                                                                           | `api.pubsub.salesforce.com:7443` |
+| `PUB_SUB_PROTO_FILE`     | Path to the protobuf file.                                                                                                                                                      | `pubsub_api.proto`               |
