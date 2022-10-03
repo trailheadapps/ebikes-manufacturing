@@ -16,7 +16,7 @@
         "jsforce": "^1.11.0",
         "lwc": "^2.23.2",
         "lwr": "^0.7.6",
-        "ws": "^8.8.1"
+        "ws": "^8.9.0"
     },
     "devDependencies": {
         "@lwc/eslint-plugin-lwc": "^1.5.0",
