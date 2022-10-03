@@ -6,7 +6,7 @@
     "bugs": "https://github.com/pozil/lwc-oss-manufacturing/issues",
     "dependencies": {
         "@babel/core": "^7.18.13",
-        "@grpc/grpc-js": "^1.6.12",
+        "@grpc/grpc-js": "^1.7.1",
         "@grpc/proto-loader": "^0.7.3",
         "avro-js": "^1.11.1",
         "bulma": "^0.7.5",
