@@ -1,6 +1,6 @@
-const jsforce = require('jsforce');
+import jsforce from 'jsforce';
 
-module.exports = class SalesforceClient {
+export default class SalesforceClient {
     client;
 
     /**
@@ -25,4 +25,12 @@ module.exports = class SalesforceClient {
             throw new Error(`Failed to connect to Salesforce: ${err}`);
         }
     }
-};
+
+    getConnectionMetadata() {
+        return {
+            accessToken: this.client.accessToken,
+            instanceUrl: this.client.instanceUrl,
+            organizationId: this.client.userInfo.organizationId
+        };
+    }
+}

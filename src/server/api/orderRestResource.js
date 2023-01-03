@@ -1,4 +1,4 @@
-module.exports = class OrderRestResource {
+export default class OrderRestResource {
     constructor(sfdc) {
         this.sfdc = sfdc;
     }
@@ -51,4 +51,4 @@ module.exports = class OrderRestResource {
             }
         });
     }
-};
+}

@@ -1,8 +1,8 @@
-const { WebSocket, WebSocketServer } = require('ws');
+import { WebSocket, WebSocketServer } from 'ws';
 
 const WSS_PING_INTERVAL = 29000;
 
-module.exports = class WebSocketService {
+export default class WebSocketService {
     constructor() {
         this.messageListeners = [];
     }
@@ -86,4 +86,4 @@ module.exports = class WebSocketService {
             }
         });
     }
-};
+}

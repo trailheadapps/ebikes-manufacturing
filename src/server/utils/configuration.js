@@ -1,16 +1,14 @@
-// Load  config
-require('dotenv').config();
+import * as dotenv from 'dotenv';
 
-module.exports = class Configuration {
+export default class Configuration {
     static checkConfig() {
+        dotenv.config();
         [
             'SALESFORCE_LOGIN_URL',
             'SALESFORCE_API_VERSION',
             'SALESFORCE_USERNAME',
             'SALESFORCE_PASSWORD',
-            'SALESFORCE_TOKEN',
-            'PUB_SUB_ENDPOINT',
-            'PUB_SUB_PROTO_FILE'
+            'SALESFORCE_TOKEN'
         ].forEach((varName) => {
             if (!process.env[varName]) {
                 console.error(`ERROR: Missing ${varName} environment variable`);
@@ -34,12 +32,4 @@ module.exports = class Configuration {
     static getSfSecuredPassword() {
         return process.env.SALESFORCE_PASSWORD + process.env.SALESFORCE_TOKEN;
     }
-
-    static getPubSubEndpoint() {
-        return process.env.PUB_SUB_ENDPOINT;
-    }
-
-    static getPubSubProtoFilePath() {
-        return process.env.PUB_SUB_PROTO_FILE;
-    }
-};
+}

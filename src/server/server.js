@@ -1,9 +1,9 @@
-const Configuration = require('./utils/configuration.js'),
-    WebSocketService = require('./services/webSocketService.js'),
-    SalesforceClient = require('./services/salesforceClient.js'),
-    PubSubService = require('./services/pubSubService.js'),
-    OrderRestResource = require('./api/orderRestResource.js'),
-    LWR = require('lwr');
+import Configuration from './utils/configuration.js';
+import WebSocketService from './services/webSocketService.js';
+import SalesforceClient from './services/salesforceClient.js';
+import OrderRestResource from './api/orderRestResource.js';
+import { createServer } from 'lwr';
+import PubSubApiClient from 'salesforce-pubsub-api-client';
 
 const ORDER_CDC_TOPIC = '/data/Order__ChangeEvent';
 const MANUFACTURING_PE_TOPIC = '/event/Manufacturing_Event__e';
@@ -12,7 +12,7 @@ async function start() {
     Configuration.checkConfig();
 
     // Configure server
-    const lwrServer = LWR.createServer();
+    const lwrServer = createServer();
     const app = lwrServer.getInternalServer();
     const wss = new WebSocketService();
 
@@ -25,20 +25,19 @@ async function start() {
         Configuration.getSfSecuredPassword(),
         Configuration.getSfApiVersion()
     );
+    const conMetadata = sfClient.getConnectionMetadata();
 
-    // Use Pub Sub API to retrieve streaming event schemas
-    const pubSub = new PubSubService(
-        Configuration.getPubSubProtoFilePath(),
-        Configuration.getPubSubEndpoint(),
-        sfClient.client
+    // Connect to Pub Sub API
+    const pubSubClient = new PubSubApiClient();
+    await pubSubClient.connectWithAuth(
+        conMetadata.accessToken,
+        conMetadata.instanceUrl,
+        conMetadata.organizationId,
+        Configuration.getSfUsername()
     );
-    const [orderCdcSchema, manufacturingPeSchema] = await Promise.all([
-        pubSub.getEventSchema(ORDER_CDC_TOPIC),
-        pubSub.getEventSchema(MANUFACTURING_PE_TOPIC)
-    ]);
-
     // Subscribe to Change Data Capture events on Reseller Order records
-    pubSub.subscribe(ORDER_CDC_TOPIC, orderCdcSchema, 10, (cdcEvent) => {
+    const orderCdcEmitter = await pubSubClient.subscribe(ORDER_CDC_TOPIC, 10);
+    orderCdcEmitter.on('data', (cdcEvent) => {
         const status = cdcEvent.payload.Status__c?.string;
         const header = cdcEvent.payload.ChangeEventHeader;
         // Filter events related to order status updates
@@ -66,11 +65,7 @@ async function start() {
             Order_Id__c: { string: orderId },
             Status__c: { string: status }
         };
-        await pubSub.publish(
-            MANUFACTURING_PE_TOPIC,
-            manufacturingPeSchema,
-            eventData
-        );
+        await pubSubClient.publish(MANUFACTURING_PE_TOPIC, eventData);
         console.log('Published Manufacturing_Event__e', eventData);
     });
 
