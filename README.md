@@ -28,7 +28,7 @@ Once deployed, see the [configuration reference](#configuration-reference) secti
 
 ### Local setup
 
-1. Create a `.env` file at the root of _this_ project 
+1. Create a `.env` file at the root of the `ebikes-manufacturing` project
 
     ```properties
     SALESFORCE_AUTH_TYPE="user-supplied"
