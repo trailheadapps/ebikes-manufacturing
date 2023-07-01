@@ -6,7 +6,7 @@
     "author": "pozil",
     "bugs": "https://github.com/pozil/lwc-oss-manufacturing/issues",
     "dependencies": {
-        "@babel/core": "^7.22.1",
+        "@babel/core": "^7.22.5",
         "bulma": "0.7.5",
         "dotenv": "^16.1.4",
         "express": "^4.18.2",
