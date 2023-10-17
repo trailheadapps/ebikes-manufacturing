@@ -38,7 +38,7 @@ async function start() {
     // Subscribe to Change Data Capture events on Reseller Order records
     const orderCdcEmitter = await pubSubClient.subscribe(ORDER_CDC_TOPIC, 10);
     orderCdcEmitter.on('data', (cdcEvent) => {
-        const status = cdcEvent.payload.Status__c?.string;
+        const status = cdcEvent.payload.Status__c;
         const header = cdcEvent.payload.ChangeEventHeader;
         // Filter events related to order status updates
         if (header.changeType === 'UPDATE' && status) {
