@@ -21,12 +21,13 @@
         "@lwc/jest-preset": "^14.1.0",
         "@salesforce/eslint-config-lwc": "^3.5.2",
         "@salesforce/eslint-plugin-lightning": "^1.0.0",
+        "cross-env": "^7.0.3",
         "eslint": "^8.51.0",
         "eslint-plugin-import": "^2.28.1",
         "eslint-plugin-jest": "^27.4.2",
         "husky": "^8.0.3",
         "jest": "^29.7.0",
-        "lint-staged": "^15.0.1",
+        "lint-staged": "^15.0.2",
         "prettier": "^3.0.3",
         "shx": "^0.3.4"
     },
@@ -45,7 +46,7 @@
     },
     "repository": "pozil/lwc-oss-manufacturing",
     "scripts": {
-        "start": "MODE=prod node src/server/server.js",
+        "start": "cross-env MODE=prod node src/server/server.js",
         "dev": "node src/server/server.js",
         "lint": "eslint ./src/**/*.js",
         "prettier": "prettier --write '**/*.{css,html,js,json,md,yaml,yml}'",
