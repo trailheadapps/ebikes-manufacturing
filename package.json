@@ -14,7 +14,7 @@
         "lwc": "^3.8.0",
         "lwr": "^0.10.12",
         "salesforce-pubsub-api-client": "^3.0.2",
-        "ws": "^8.14.2"
+        "ws": "^8.16.0"
     },
     "devDependencies": {
         "@lwc/eslint-plugin-lwc": "^1.7.0",
