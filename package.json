@@ -13,7 +13,7 @@
         "jsforce": "^1.11.1",
         "lwc": "^3.8.0",
         "lwr": "^0.10.12",
-        "salesforce-pubsub-api-client": "^3.0.2",
+        "salesforce-pubsub-api-client": "^3.4.1",
         "ws": "^8.14.2"
     },
     "devDependencies": {
