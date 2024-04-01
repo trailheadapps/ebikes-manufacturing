@@ -17,7 +17,7 @@
         "ws": "^8.14.2"
     },
     "devDependencies": {
-        "@lwc/eslint-plugin-lwc": "^1.7.0",
+        "@lwc/eslint-plugin-lwc": "^1.7.2",
         "@lwc/jest-preset": "^14.3.0",
         "@salesforce/eslint-config-lwc": "^3.5.3",
         "@salesforce/eslint-plugin-lightning": "^1.0.0",
