@@ -10,7 +10,7 @@
         "bulma": "0.7.5",
         "dotenv": "^16.4.5",
         "express": "^4.19.2",
-        "jsforce": "^1.11.1",
+        "jsforce": "^3.4.1",
         "lwc": "^6.7.2",
         "lwr": "^0.12.4",
         "salesforce-pubsub-api-client": "^4.1.1",
