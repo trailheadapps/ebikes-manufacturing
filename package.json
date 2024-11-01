@@ -12,7 +12,7 @@
         "express": "^4.19.2",
         "jsforce": "^1.11.1",
         "lwc": "^6.7.2",
-        "lwr": "^0.12.4",
+        "lwr": "^0.14.4",
         "salesforce-pubsub-api-client": "^4.1.1",
         "ws": "^8.17.1"
     },
