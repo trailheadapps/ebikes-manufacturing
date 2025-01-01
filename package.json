@@ -8,7 +8,7 @@
     "dependencies": {
         "@babel/core": "^7.24.7",
         "bulma": "0.7.5",
-        "dotenv": "^16.4.5",
+        "dotenv": "^16.4.7",
         "express": "^4.19.2",
         "jsforce": "^1.11.1",
         "lwc": "^6.7.2",
