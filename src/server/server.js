@@ -8,13 +8,19 @@ import PubSubApiClient from 'salesforce-pubsub-api-client';
 const ORDER_CDC_TOPIC = '/data/Order__ChangeEvent';
 const MANUFACTURING_PE_TOPIC = '/event/Manufacturing_Event__e';
 
+/**
+ * WebSocket service
+ * @type {WebSocketService}
+ */
+var wss;
+
 async function start() {
     Configuration.checkConfig();
 
     // Configure server
     const lwrServer = createServer();
     const app = lwrServer.getInternalServer();
-    const wss = new WebSocketService();
+    wss = new WebSocketService();
 
     // Connect to Salesforce
     // Disclaimer: change this and use JWT auth in production!
@@ -28,33 +34,16 @@ async function start() {
     const conMetadata = sfClient.getConnectionMetadata();
 
     // Connect to Pub Sub API
-    const pubSubClient = new PubSubApiClient();
-    await pubSubClient.connectWithAuth(
-        conMetadata.accessToken,
-        conMetadata.instanceUrl,
-        conMetadata.organizationId,
-        Configuration.getSfUsername()
-    );
-    // Subscribe to Change Data Capture events on Reseller Order records
-    const orderCdcEmitter = await pubSubClient.subscribe(ORDER_CDC_TOPIC, 10);
-    orderCdcEmitter.on('data', (cdcEvent) => {
-        const status = cdcEvent.payload.Status__c;
-        const header = cdcEvent.payload.ChangeEventHeader;
-        // Filter events related to order status updates
-        if (header.changeType === 'UPDATE' && status) {
-            header.recordIds.forEach((orderId) => {
-                // Notify client via WebSocket
-                const message = {
-                    type: 'manufacturingEvent',
-                    data: {
-                        orderId,
-                        status
-                    }
-                };
-                wss.broadcast(JSON.stringify(message));
-            });
-        }
+    const pubSubClient = new PubSubApiClient({
+        authType: 'user-supplied',
+        accessToken: conMetadata.accessToken,
+        instanceUrl: conMetadata.instanceUrl,
+        organizationId: conMetadata.organizationId
     });
+    await pubSubClient.connect();
+
+    // Subscribe to Change Data Capture events on Reseller Order records
+    pubSubClient.subscribe(ORDER_CDC_TOPIC, orderChangeEventHandler);
 
     // Handle incoming WS events
     wss.addMessageListener(async (message) => {
@@ -93,6 +82,32 @@ async function start() {
             console.error(err);
             process.exit(1);
         });
+}
+
+function orderChangeEventHandler(subscription, callbackType, data) {
+    switch (callbackType) {
+        case 'event':
+            {
+                const status = data.payload.Status__c;
+                const header = data.payload.ChangeEventHeader;
+                // Filter events related to order status updates
+                if (header.changeType === 'UPDATE' && status) {
+                    header.recordIds.forEach((orderId) => {
+                        // Notify client via WebSocket
+                        const message = {
+                            type: 'manufacturingEvent',
+                            data: {
+                                orderId,
+                                status
+                            }
+                        };
+                        wss.broadcast(JSON.stringify(message));
+                    });
+                }
+            }
+            break;
+        default:
+    }
 }
 
 start();
