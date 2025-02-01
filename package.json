@@ -11,7 +11,7 @@
         "dotenv": "^16.4.7",
         "express": "^4.21.2",
         "jsforce": "^3.6.3",
-        "lwc": "^8.12.4",
+        "lwc": "^8.12.7",
         "lwr": "^0.16.2",
         "salesforce-pubsub-api-client": "^5.2.2",
         "ws": "^8.18.0"
