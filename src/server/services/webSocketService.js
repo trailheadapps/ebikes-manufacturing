@@ -49,7 +49,6 @@ export default class WebSocketService {
         });
 
         // Check if WS clients are alive
-        // eslint-disable-next-line @lwc/lwc/no-async-operation
         setInterval(() => {
             this.wss.clients.forEach((wsClient) => {
                 if (!wsClient.isAlive) {

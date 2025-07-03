@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { LightningElement, track, wire } from 'lwc';
 import { WebSocketClient } from 'utils/webSocketClient';
 import getOrders from 'data/wireOrders';
