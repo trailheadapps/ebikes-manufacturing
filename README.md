@@ -11,8 +11,8 @@ This demo is built with the Lightning Web Runtime and demonstrates the use of th
 
 You can either install the app on
 
--   [Heroku](#heroku-deploy) (quick deployment for demo purposes)
--   your [local machine](#local-setup) (prefered for development purposes)
+- [Heroku](#heroku-deploy) (quick deployment for demo purposes)
+- your [local machine](#local-setup) (prefered for development purposes)
 
 ### Heroku deploy
 
